@@ -4,7 +4,7 @@ var btn = document.querySelector(".login-button");
 
 function checkvalidity(){
         if(user.value == "" || pass.value ==""){
-            alert("Please provide Username & Password ")
+            alert("Por favor, informe Usuário e Senha")
         }
     
 }
