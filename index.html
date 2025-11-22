@@ -41,13 +41,57 @@
           <div class="line3"></div>
         </div>
         <a href="#" class="icon-btn" aria-label="Buscar" title="Buscar">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
         </a>
         <a href="login.html" class="icon-btn" aria-label="Conta" title="Conta">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
         </a>
-        <a href="products.html" class="icon-btn" aria-label="Carrinho" title="Carrinho">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        <a
+          href="products.html"
+          class="icon-btn"
+          aria-label="Carrinho"
+          title="Carrinho"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path
+              d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+            ></path>
+          </svg>
         </a>
       </div>
       <ul class="nav-links">
@@ -58,66 +102,59 @@
         <li><a href="login.html" id="login">Login</a></li>
       </ul>
     </nav>
-    <br /> <br>
+    <!-- Vídeo de destaque topo -->
+    <header class="video-header">
+      <video
+        id="heroVideo"
+        src="images/natVideo.mov"
+        autoplay
+        muted
+        playsinline
+        loop
+      ></video>
+      <div class="video-overlay"></div>
+      <div class="video-content">
+        <h1>NOVIDADES</h1>
+        <p>COLEÇÕES ATUAIS</p>
+      </div>
+    </header>
 
-    <!--<div class="index-offers-img">
-    <a href="categories.html"><img src="images/index-img/1.png" alt=""></a>
-    <a href="categories.html"><img src="images/index-img/2.png" alt=""></a>
-    <a href="categories.html"><img src="images/index-img/3.png" alt=""></a>
-    <a href="categories.html"><img src="images/index-img/4.png" alt=""></a>
-  </div>-->
-
-    <br /><br /><br><br><br>
+    <br /><br />
 
     <h2 class="head-of-offer">NOVIDADES</h2>
     <br />
 
-    <div class="index-grid-img-1">
-      <a href="categories.html"
-        ><img
-          src="images/index-img/anton-levin-P8prss71psk-unsplash.jpg"
-          alt=""
-          srcset=""
-      /></a>
-      <a href="categories.html"
-        ><img
-          src="images/index-img/bogdan-glisik-2WgOPYJuPsU-unsplash (1).jpg"
-          alt=""
-          srcset=""
-      /></a>
-      <a href="categories.html"
-        ><img
-          src="images/index-img/calvin-lupiya--yPg8cusGD8-unsplash.jpg"
-          alt=""
-      /></a>
-      <a href="categories.html">
-        <h4 class="info-of-img-below">Para os jovens</h4>
-      </a>
-      <a href="categories.html">
-        <h4 class="info-of-img-below">Novidades</h4>
-      </a>
-      <a href="categories.html">
-        <h4 class="info-of-img-below">Destaques como o Sol</h4>
-      </a>
+    <div class="novidades-carousel">
+      <button class="carousel-btn prev" aria-label="Anterior">&#10094;</button>
+      <div class="index-grid-img-1" role="list">
+        <div class="carousel-item" role="listitem">
+          <a href="categories.html"><img src="images/index-img/anton-levin-P8prss71psk-unsplash.jpg" alt="Anton Levin" /></a>
+          <h4 class="info-of-img-below">Para os jovens</h4>
+        </div>
+        <div class="carousel-item" role="listitem">
+          <a href="categories.html"><img src="images/index-img/bogdan-glisik-2WgOPYJuPsU-unsplash (1).jpg" alt="Bogdan Glisik" /></a>
+          <h4 class="info-of-img-below">Novidades</h4>
+        </div>
+        <div class="carousel-item" role="listitem">
+          <a href="categories.html"><img src="images/index-img/calvin-lupiya--yPg8cusGD8-unsplash.jpg" alt="Calvin Lupiya" /></a>
+          <h4 class="info-of-img-below">Destaques como o Sol</h4>
+        </div>
+        <div class="carousel-item" role="listitem">
+          <a href="categories.html"><img src="images/index-img/anton-levin-P8prss71psk-unsplash.jpg" alt="Anton Levin 2" /></a>
+          <h4 class="info-of-img-below">Street</h4>
+        </div>
+        <div class="carousel-item" role="listitem">
+          <a href="categories.html"><img src="images/index-img/bogdan-glisik-2WgOPYJuPsU-unsplash (1).jpg" alt="Bogdan Glisik 2" /></a>
+          <h4 class="info-of-img-below">Essenciais</h4>
+        </div>
+      </div>
+      <button class="carousel-btn next" aria-label="Próximo">&#10095;</button>
     </div>
     <!-- TODOS OS LINKS IRÃO PARA categories.html -->
 
     <br />
     <br />
-    <br />
 
-    <!--<h2 class="head-of-offer">EM ALTA AGORA</h2><br>
-  <p class="para-of-offer">Das passarelas direto para o seu guarda-roupa</p>
-  <br><br>
-  <div class="index-grid-img-2">
-    <a href="products.html"><img src="images/index-img/ethan-haddox-QHGcADeeT00-unsplash.jpg" id="trans-img" alt=""></a>
-    <a href="products.html"><img src="images/index-img/andres-jasso-PqbL_mxmaUE-unsplash (1).jpg" alt=""></a>
-    <a href="products.html"><img src="images/index-img/raul-hender-afc4HxPy2GM-unsplash (1).jpg" alt=""></a>
-    <a href="products.html"><img src="images/index-img/nike.png" alt="" srcset=""></a>
-    <a href="products.html"><img src="images/index-img/my-shoes2.png" alt="" srcset=""></a>
-    <a href="products.html"><img src="images/index-img/my-shoes3.png" alt="" srcset=""></a>
-  </div>
-  -->
     <br />
 
     <!-- FOOTER -->
@@ -156,10 +193,16 @@
       </div>
     </div>
     <p class="copy-right"><a href="index.html">Doce Concept </a>&copy;2025</p>
-    <p><a href="index.html">Produzido por CodeClick </a>&copy;2019</p>
+    <p class="site-credit"><a href="index.html">Produzido pela agência CodeClick</a> &copy;2025</p>
     <br />
     <!-- FOOTER -->
 
+    <script src="js/novidades-carousel.js"></script>
     <script type="text/javascript" src="js/nav.js"></script>
+    <a href="https://wa.me/5567991764022" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco no WhatsApp">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path fill="currentColor" d="M16.02 3.2c-7.11 0-12.88 5.77-12.88 12.88 0 2.27.6 4.48 1.75 6.43L3.2 28.8l6.51-1.66a12.84 12.84 0 0 0 6.31 1.61h.01c7.11 0 12.88-5.77 12.88-12.88 0-3.44-1.34-6.68-3.78-9.12a12.82 12.82 0 0 0-9.11-3.75Zm0 23.42h-.01a10.5 10.5 0 0 1-5.35-1.47l-.38-.23-3.86.98 1.03-3.76-.25-.39a10.51 10.51 0 0 1-1.61-5.59c0-5.79 4.71-10.5 10.5-10.5 2.81 0 5.45 1.1 7.43 3.08a10.43 10.43 0 0 1 3.07 7.45c0 5.79-4.72 10.5-10.5 10.5Zm5.76-7.86c-.31-.16-1.84-.91-2.12-1.02-.28-.1-.49-.15-.7.16-.21.31-.81 1.02-.99 1.23-.18.21-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.53-.92-.82-1.54-1.83-1.72-2.14-.18-.31-.02-.48.14-.64.14-.13.31-.36.46-.54.15-.18.2-.31.31-.51.1-.21.05-.39-.03-.54-.08-.16-.7-1.68-.96-2.3-.25-.6-.5-.52-.7-.53l-.6-.01c-.21 0-.54.08-.82.39-.28.31-1.08 1.05-1.08 2.56 0 1.51 1.11 2.97 1.26 3.17.15.21 2.18 3.33 5.29 4.55.74.32 1.32.51 1.77.65.74.23 1.41.2 1.94.12.59-.09 1.84-.75 2.1-1.47.26-.72.26-1.34.18-1.47-.08-.13-.28-.21-.59-.36Z"/>
+      </svg>
+    </a>
   </body>
 </html>
