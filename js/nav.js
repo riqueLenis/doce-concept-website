@@ -39,3 +39,49 @@ if (heroVideo) {
     if (heroVideo.duration > 30) heroVideo.currentTime = 30;
   });
 }
+
+// Search Functionality
+function initSearch() {
+  const searchBtn = document.querySelector('a[aria-label="Buscar"]');
+  if (!searchBtn) return;
+
+  // Create overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'search-overlay';
+  overlay.innerHTML = `
+    <div class="search-box">
+      <input type="text" placeholder="O QUE VOCÊ PROCURA?" id="searchInput">
+      <button id="closeSearch">×</button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  // Event listeners
+  searchBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    overlay.classList.add('active');
+    setTimeout(() => document.getElementById('searchInput').focus(), 100);
+  });
+
+  document.getElementById('closeSearch').addEventListener('click', () => {
+    overlay.classList.remove('active');
+  });
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('active');
+    }
+  });
+
+  const input = document.getElementById('searchInput');
+  input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      const term = input.value.trim();
+      if (term) {
+        window.location.href = `products.html?search=${encodeURIComponent(term)}`;
+      }
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initSearch);
