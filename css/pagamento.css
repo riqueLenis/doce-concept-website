@@ -1,0 +1,224 @@
+.pagamento-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.pagamento-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.2rem;
+  color: #151515;
+}
+
+.progress-bar {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 50px;
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.step {
+  position: relative;
+}
+
+.step::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 60px;
+  height: 2px;
+  background: #ddd;
+  transform: translateY(-50%);
+}
+
+.step:last-child::after {
+  display: none;
+}
+
+.step.active {
+  color: #151515;
+  font-weight: 600;
+}
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 50px;
+}
+
+.form-pagamento {
+  background: #fafafa;
+  padding: 30px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+.form-pagamento h2 {
+  margin: 0 0 25px;
+  font-size: 1.4rem;
+  color: #151515;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.dupla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.metodos-pagamento {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.metodo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.metodo:hover {
+  border-color: #151515;
+}
+
+.parcelamento select {
+  margin-top: 10px;
+}
+
+.btn-finalizar-pagamento {
+  width: 100%;
+  background: #151515;
+  color: white;
+  padding: 16px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+  margin-top: 30px;
+  transition: background 0.3s;
+}
+
+.btn-finalizar-pagamento:hover {
+  background: #000;
+}
+
+/* Resumo */
+.resumo-pedido {
+  background: #151515;
+  color: white;
+  padding: 30px;
+  border-radius: 10px;
+  height: fit-content;
+}
+
+.resumo-pedido h2 {
+  margin-bottom: 25px;
+  font-size: 1.4rem;
+}
+
+.itens-resumo {
+  margin-bottom: 30px;
+}
+
+.item {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.item img {
+  width: 70px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.item p {
+  font-size: 0.95rem;
+  margin: 0 0 8px;
+}
+
+.totais {
+  border-top: 1px solid #444;
+  padding-top: 20px;
+}
+
+.totais > div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.total-final {
+  font-size: 1.4rem !important;
+  font-weight: 700;
+  padding-top: 15px;
+  border-top: 2px solid #fff;
+  margin-top: 15px;
+}
+
+.garantia {
+  font-size: 0.85rem;
+  margin-top: 30px;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+.frete-gratis {
+  color: #27ae60;
+  font-weight: 600;
+}
+
+/* Responsivo */
+@media (max-width: 968px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+  .resumo-pedido {
+    order: -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .dupla {
+    grid-template-columns: 1fr;
+  }
+  .progress-bar {
+    font-size: 0.8rem;
+    gap: 15px;
+  }
+  .step::after {
+    width: 30px;
+  }
+}
