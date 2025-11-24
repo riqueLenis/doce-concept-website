@@ -1,12 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const itensCarrinho = document.querySelectorAll(".carrinho-item");
-  const subtotalElement = document.querySelector(
-    ".resumo-linha span:last-child"
-  );
-  const totalElement = document.querySelector(
-    ".resumo-total strong:last-child"
-  );
+  const containerItens = document.querySelector(".carrinho-itens");
+  const subtotalElement = document.querySelector(".resumo-linha span:last-child");
+  const totalElement = document.querySelector(".resumo-total strong:last-child");
   const freteElement = document.querySelector(".frete-gratis");
+  
+  // Load cart from localStorage
+  let cart = JSON.parse(localStorage.getItem('doceCart')) || [];
 
   function formatarMoeda(valor) {
     return new Intl.NumberFormat("pt-BR", {
@@ -15,77 +14,109 @@ document.addEventListener("DOMContentLoaded", function () {
     }).format(valor);
   }
 
-  function atualizarTotais() {
-    let subtotal = 0;
+  function renderCart() {
+    // If container is missing (e.g. already removed), stop
+    if (!containerItens) return;
+    
+    containerItens.innerHTML = "";
+    
+    if (cart.length === 0) {
+      mostrarCarrinhoVazio();
+      return;
+    }
 
-    itensCarrinho.forEach((item) => {
-      const precoUnitarioText = item.querySelector(".preco").textContent;
-      const precoUnitario = parseFloat(
-        precoUnitarioText.replace("R$", "").replace(",", ".").trim()
-      );
-      const quantidade = parseInt(item.querySelector("input").value);
-      const totalItem = precoUnitario * quantidade;
-
-      item.querySelector(".item-total").textContent = formatarMoeda(totalItem);
-
-      subtotal += totalItem;
+    cart.forEach((item, index) => {
+      const itemHTML = `
+        <div class="carrinho-item" data-index="${index}">
+          <img src="${item.image || 'images/products-img/women/kurti1.png'}" alt="${item.name}" />
+          <div class="item-info">
+            <h3>${item.name}</h3>
+            <p>Tamanho: Único</p>
+            <p class="preco">${formatarMoeda(item.price)}</p>
+          </div>
+          <div class="item-quantidade">
+            <button class="btn-menos">-</button>
+            <input type="number" value="${item.quantity}" min="1" readonly />
+            <button class="btn-mais">+</button>
+          </div>
+          <div class="item-total">${formatarMoeda(item.price * item.quantity)}</div>
+          <button class="btn-remover" aria-label="Remover item">×</button>
+        </div>
+      `;
+      containerItens.insertAdjacentHTML('beforeend', itemHTML);
     });
 
-    subtotalElement.textContent = formatarMoeda(subtotal);
+    attachEventListeners();
+    atualizarTotais();
+  }
 
+  function attachEventListeners() {
+    const itens = document.querySelectorAll(".carrinho-item");
+    
+    itens.forEach(item => {
+      const index = parseInt(item.dataset.index);
+      const btnMais = item.querySelector(".btn-mais");
+      const btnMenos = item.querySelector(".btn-menos");
+      const btnRemover = item.querySelector(".btn-remover");
+
+      btnMais.addEventListener("click", () => {
+        cart[index].quantity++;
+        saveCart();
+        renderCart();
+      });
+
+      btnMenos.addEventListener("click", () => {
+        if (cart[index].quantity > 1) {
+          cart[index].quantity--;
+          saveCart();
+          renderCart();
+        }
+      });
+
+      btnRemover.addEventListener("click", () => {
+        // Animation before removing
+        item.style.transition = "all 0.4s ease";
+        item.style.opacity = "0";
+        item.style.transform = "translateX(-20px)";
+        
+        setTimeout(() => {
+            cart.splice(index, 1);
+            saveCart();
+            renderCart();
+        }, 400);
+      });
+    });
+  }
+
+  function saveCart() {
+    localStorage.setItem('doceCart', JSON.stringify(cart));
+  }
+
+  function atualizarTotais() {
+    let subtotal = 0;
+    cart.forEach(item => {
+      subtotal += item.price * item.quantity;
+    });
+
+    if (subtotalElement) subtotalElement.textContent = formatarMoeda(subtotal);
+
+    let frete = 0;
     if (subtotal >= 500) {
-      freteElement.textContent = "Grátis";
-      freteElement.style.color = "#27ae60";
+      if (freteElement) {
+        freteElement.textContent = "Grátis";
+        freteElement.style.color = "#27ae60";
+      }
     } else {
-      const frete = 29.9;
-      freteElement.textContent = formatarMoeda(frete);
-      freteElement.style.color = "#e74c3c";
+      frete = 29.9;
+      if (freteElement) {
+        freteElement.textContent = formatarMoeda(frete);
+        freteElement.style.color = "#e74c3c";
+      }
       subtotal += frete;
     }
 
-    totalElement.textContent = formatarMoeda(subtotal);
+    if (totalElement) totalElement.textContent = formatarMoeda(subtotal + frete);
   }
-
-  itensCarrinho.forEach((item) => {
-    const btnMais = item.querySelector(".btn-mais");
-    const btnMenos = item.querySelector(".btn-menos");
-    const inputQuantidade = item.querySelector("input");
-    const btnRemover = item.querySelector(".btn-remover");
-
-    btnMais.addEventListener("click", () => {
-      inputQuantidade.value = parseInt(inputQuantidade.value) + 1;
-      atualizarTotais();
-    });
-
-    btnMenos.addEventListener("click", () => {
-      if (parseInt(inputQuantidade.value) > 1) {
-        inputQuantidade.value = parseInt(inputQuantidade.value) - 1;
-        atualizarTotais();
-      }
-    });
-
-    inputQuantidade.addEventListener("change", () => {
-      let valor = parseInt(inputQuantidade.value);
-      if (isNaN(valor) || valor < 1) valor = 1;
-      inputQuantidade.value = valor;
-      atualizarTotais();
-    });
-
-    btnRemover.addEventListener("click", () => {
-      item.style.transition = "all 0.4s ease";
-      item.style.opacity = "0";
-      item.style.transform = "translateX(-20px)";
-
-      setTimeout(() => {
-        item.remove();
-        if (document.querySelectorAll(".carrinho-item").length === 0) {
-          mostrarCarrinhoVazio();
-        } else {
-          atualizarTotais();
-        }
-      }, 400);
-    });
-  });
 
   function mostrarCarrinhoVazio() {
     const container = document.querySelector(".carrinho-container");
@@ -99,9 +130,15 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     `;
 
-    document.querySelector(".carrinho-itens").remove();
-    document.querySelector(".carrinho-resumo").remove();
-    container.insertAdjacentHTML("beforeend", vazioHTML);
+    const itensContainer = document.querySelector(".carrinho-itens");
+    const resumoContainer = document.querySelector(".carrinho-resumo");
+    
+    if(itensContainer) itensContainer.remove();
+    if(resumoContainer) resumoContainer.remove();
+    
+    if(!document.querySelector('.carrinho-vazio')) {
+        container.insertAdjacentHTML("beforeend", vazioHTML);
+    }
   }
 
   const btnFinalizar = document.querySelector(".btn-finalizar");
@@ -111,5 +148,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  atualizarTotais();
+  // Initial render
+  renderCart();
 });

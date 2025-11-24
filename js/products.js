@@ -1,27 +1,53 @@
 var ul = document.getElementById("ul_pr");
-var li = document.querySelectorAll("li");
 
-function add(id){
-    // var del_new = document.createElement("button");
-    var li_new = document.createElement("li");
-    var li_inp = document.createTextNode(id);
-    li_new.appendChild(li_inp);
-    // li_new.appendChild(document.createTextNode( '\u00A0\u00A0' ) );
-    ul.appendChild(li_new);
-    // var del_inp = document.createTextNode("Del");
-    // del_new.appendChild(del_inp);
-    // li_new.appendChild(del_new);
-    ul.appendChild(document.createElement("br"));
+function add(id) {
+  // Encontrar o elemento da imagem para pegar o src
+  const imgElement = document.getElementById(id);
+  const imgSrc = imgElement ? imgElement.src : "";
+
+  // Parse do ID: "Nome || Preço"
+  let parts = id.split("||");
+  let name = parts[0].trim();
+  let priceStr = parts[1] ? parts[1].trim() : "0";
+  
+  // Limpar string de preço para número
+  let price = parseFloat(priceStr.replace(/[^0-9.]/g, ''));
+
+  // Pegar carrinho atual
+  let cart = JSON.parse(localStorage.getItem('doceCart')) || [];
+
+  // Verificar se item já existe
+  let existingItem = cart.find(item => item.name === name);
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({
+      name: name,
+      price: price,
+      quantity: 1,
+      image: imgSrc
+    });
+  }
+
+  localStorage.setItem('doceCart', JSON.stringify(cart));
+
+  // Feedback visual na lista da página (mantendo funcionalidade original melhorada)
+  var li_new = document.createElement("li");
+  li_new.textContent = `${name} - Adicionado!`;
+  ul.appendChild(li_new);
+  ul.appendChild(document.createElement("br"));
+  
+  alert("Produto adicionado ao carrinho com sucesso!");
 }
 
 window.emptyList = function () {
     var ul = document.querySelector('#ul_pr');
-    var listLength = ul.children.length;
-  
-    for (i = 0; i < listLength; i++) {
-      ul.removeChild(ul.children[0]);
-    }
-  }
+    ul.innerHTML = "";
+    // Opcional: Limpar localStorage também?
+    // localStorage.removeItem('doceCart'); 
+    // O botão diz "Limpar Minha Lista", pode ser interpretado como limpar o carrinho ou só a lista visual.
+    // Vou assumir que é só a lista visual por enquanto, para não deletar o carrinho sem querer.
+}
 
 // Search Filtering Logic
 document.addEventListener('DOMContentLoaded', () => {
